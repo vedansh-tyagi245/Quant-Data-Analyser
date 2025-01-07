@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import Papa from 'papaparse';  // You need to install papaparse for CSV parsing
 import CSVTable from '../CSV-Table-components/CSVTable';
 import Navbar from '../home-components/Navbar';
+import Analyze from '../Analises-container/Analyze';
 
-function UploadFile({link, setLink}) {
+function UploadFile({ link, setLink }) {
     const [file, setFile] = useState(null);
     const [csvData, setCsvData] = useState(null);
-    const [showCsvTable, setShowCsvTable] = useState(false);
+    const [jsonData, setJsonData] = useState(null);
+    const [showAnalyze, setShowAnalyze] = useState(false);
 
     // Handle file selection
     const handleFileChange = (e) => {
@@ -22,47 +24,59 @@ function UploadFile({link, setLink}) {
         if (file) {
             Papa.parse(file, {
                 complete: (result) => {
-                    setCsvData(result.data);
-                    setShowCsvTable(true);
+                    const rawCsvData = result.data; // The raw CSV data
+                    setCsvData(rawCsvData);
+
+                    // Convert CSV data to JSON format
+                    const jsonFormat = rawCsvData.map((row) => {
+                        return row; // Each row is already a JSON object if header: true
+                    });
+
+                    setJsonData(jsonFormat);
+                    console.log("JSON Data:", jsonFormat); // Log JSON data to console
+                    setShowAnalyze(true);
                 },
-                header: true,  // assuming CSV has headers
+                header: true, // assuming CSV has headers
             });
         }
     };
 
     return (
         <>
-        <div className='bg-grid-white h-[100vh]'>
-            <Navbar />
+            <div className='bg-grid-white h-[100vh]'>
+                <Navbar />
 
-            {/* Full form container */}
-            {!showCsvTable &&
-                <form className="flex items-center space-x-1 justify-center h-[70vh]">
+                {/* Full form container */}
+                {!showAnalyze && <div>
 
-                    {/* Choose file button */}
-                    <label className="block bg-gray-700 bg-opacity-30 rounded-l-full p-4 h-16">
-                        <span className="sr-only">Choose profile photo</span>
-                        <input type="file" accept=".csv" onChange={handleFileChange} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-300" />
-                    </label>
+                    <form className="flex items-end space-x-1 justify-center h-[35vh]">
 
-                    {/* Upload Button */}
-                    <button
-                        onClick={handleUpload}
-                        disabled={!file} // Disable the button if no file is selected
-                        className={`py-4 px-4 h-16 rounded-r-3xl transition text-white ${file
-                            ? "bg-gray-400 hover:bg-gray-600 bg-opacity-20"
-                            : "bg-gray-500 cursor-not-allowed"
-                        }`}
+                        {/* Choose file button */}
+                        <label className="block bg-gray-700 bg-opacity-30 rounded-l-full p-4 h-16">
+                            <input type="file" accept=".csv" onChange={handleFileChange} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-300" />
+                        </label>
+
+                        {/* Upload Button */}
+                        <button
+                            onClick={handleUpload}
+                            disabled={!file} // Disable the button if no file is selected
+                            className={`py-4 px-4 h-16 rounded-r-3xl transition text-white ${file
+                                ? "bg-gray-400 hover:bg-gray-600 bg-opacity-20"
+                                : "bg-gray-500 cursor-not-allowed"
+                                }`}
                         >
-                        Upload
-                    </button>
-                </form>
-            }
+                            Upload
+                        </button>
+                    </form>
+                    <div className='text-purple-600 text-center'>Choose only csv file</div>
+                </div>
 
-            {/* Display CSV Data in Table */}
-            {showCsvTable && <CSVTable csvData={csvData} setCsvData={setCsvData} />}
-        </div>
-            </>
+                }
+
+                {/* Display CSV Data in Table */}
+                {showAnalyze && <Analyze csvData={csvData} setCsvData={setCsvData} jsonData={jsonData} setJsonData={setJsonData} />}
+            </div>
+        </>
     )
 }
 
