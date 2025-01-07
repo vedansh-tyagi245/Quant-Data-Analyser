@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Navbar from '../home-components/Navbar';
+import Navbar from './Navbar';
 import Papa from 'papaparse';  // You need to install papaparse for CSV parsing
-import CSVTable from '../CSV-Table-components/CSVTable';
+import CSVTable from './CSVTable';
 
 function UploadFile() {
     const [file, setFile] = useState(null);
