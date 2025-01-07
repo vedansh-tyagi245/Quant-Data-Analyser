@@ -44,7 +44,7 @@ function BuildLogs({ csvData, setCsvData, jsonData, setJsonData }) {
             {/* Show response or error */}
             {response && (
                 <div className="p-4 rounded">
-                    <h3 className="font-bold inline text-red-600">Response from Backend==></h3>
+                    <span className="font-bold text-red-600">{"Response from Backend==>"}</span>
                     {/* Display number of columns and column names */}
                     <p className='inline'><strong className='inline px-2'>Number of columns:</strong> {response.number_of_columns},</p>
                     <p className='inline'><strong className='inline px-2'>Column names:{" {"}</strong></p>
