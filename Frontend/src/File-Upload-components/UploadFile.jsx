@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import Navbar from '../home-components/Navbar';
 import Papa from 'papaparse';  // You need to install papaparse for CSV parsing
 import CSVTable from '../CSV-Table-components/CSVTable';
+import Navbar from '../home-components/Navbar';
 
-function UploadFile() {
+function UploadFile({link, setLink}) {
     const [file, setFile] = useState(null);
     const [csvData, setCsvData] = useState(null);
     const [showCsvTable, setShowCsvTable] = useState(false);
@@ -32,21 +32,21 @@ function UploadFile() {
 
     return (
         <>
-        {/* <div className='bg-grid-white h-[100vh]'>
-            <Navbar /> */}
+        <div className='bg-grid-white h-[100vh]'>
+            <Navbar />
 
             {/* Full form container */}
-            {/* {!showCsvTable &&
-                <form className="flex items-center space-x-1 justify-center h-[70vh]"> */}
+            {!showCsvTable &&
+                <form className="flex items-center space-x-1 justify-center h-[70vh]">
 
                     {/* Choose file button */}
-                    {/* <label className="block bg-gray-700 bg-opacity-30 rounded-l-full p-4 h-16">
+                    <label className="block bg-gray-700 bg-opacity-30 rounded-l-full p-4 h-16">
                         <span className="sr-only">Choose profile photo</span>
                         <input type="file" accept=".csv" onChange={handleFileChange} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-300" />
-                    </label> */}
+                    </label>
 
                     {/* Upload Button */}
-                    {/* <button
+                    <button
                         onClick={handleUpload}
                         disabled={!file} // Disable the button if no file is selected
                         className={`py-4 px-4 h-16 rounded-r-3xl transition text-white ${file
@@ -56,13 +56,12 @@ function UploadFile() {
                         >
                         Upload
                     </button>
-                </form> */}
-            {/* } */}
+                </form>
+            }
 
             {/* Display CSV Data in Table */}
-            {/* {showCsvTable && <CSVTable csvData={csvData} setCsvData={setCsvData} />}
-        </div> */}
-        hello
+            {showCsvTable && <CSVTable csvData={csvData} setCsvData={setCsvData} />}
+        </div>
             </>
     )
 }
