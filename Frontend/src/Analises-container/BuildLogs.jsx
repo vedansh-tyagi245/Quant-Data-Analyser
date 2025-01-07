@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function BuildLogs({csvData, setCsvData, jsonData, setJsonData}) {
+function BuildLogs({ csvData, setCsvData, jsonData, setJsonData }) {
 
     const [response, setResponse] = useState(null); // To store the API response
     const [error, setError] = useState(null); // To handle errors, if any
@@ -8,7 +8,7 @@ function BuildLogs({csvData, setCsvData, jsonData, setJsonData}) {
     // Function to send JSON data to the backend
     const handlePostRequest = async () => {
         try {
-            const res = await fetch('http://127.0.0.1:5000/process_csv', { // Replace with your backend endpoint
+            const res = await fetch('https://quant-data-analyser-backend.onrender.com/process_csv', { // Replace with your backend endpoint
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,9 +43,17 @@ function BuildLogs({csvData, setCsvData, jsonData, setJsonData}) {
 
             {/* Show response or error */}
             {response && (
-                <div className="bg-green-500 p-4 rounded">
-                    <h3 className="font-bold">Response from Backend:</h3>
-                    <pre>{JSON.stringify(response, null, 2)}</pre>
+                <div className="p-4 rounded">
+                    <h3 className="font-bold inline text-red-600">Response from Backend==></h3>
+                    {/* Display number of columns and column names */}
+                    <p className='inline'><strong className='inline px-2'>Number of columns:</strong> {response.number_of_columns},</p>
+                    <p className='inline'><strong className='inline px-2'>Column names:{" {"}</strong></p>
+                    <ul className='inline'>
+                        {response.column_names.map((column, index) => (
+                            <li key={index} className='inline pr-2'>{column},</li>
+                        ))}
+                        <strong>{"}"}</strong>
+                    </ul>
                 </div>
             )}
 
