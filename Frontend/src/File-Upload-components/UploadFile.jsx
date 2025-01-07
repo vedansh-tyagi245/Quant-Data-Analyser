@@ -31,36 +31,39 @@ function UploadFile() {
     };
 
     return (
-        <div className='bg-grid-white h-[100vh]'>
-            <Navbar />
+        <>
+        {/* <div className='bg-grid-white h-[100vh]'>
+            <Navbar /> */}
 
             {/* Full form container */}
-            {!showCsvTable &&
-                <form className="flex items-center space-x-1 justify-center h-[70vh]">
+            {/* {!showCsvTable &&
+                <form className="flex items-center space-x-1 justify-center h-[70vh]"> */}
 
                     {/* Choose file button */}
-                    <label className="block bg-gray-700 bg-opacity-30 rounded-l-full p-4 h-16">
+                    {/* <label className="block bg-gray-700 bg-opacity-30 rounded-l-full p-4 h-16">
                         <span className="sr-only">Choose profile photo</span>
                         <input type="file" accept=".csv" onChange={handleFileChange} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-300" />
-                    </label>
+                    </label> */}
 
                     {/* Upload Button */}
-                    <button
+                    {/* <button
                         onClick={handleUpload}
                         disabled={!file} // Disable the button if no file is selected
                         className={`py-4 px-4 h-16 rounded-r-3xl transition text-white ${file
                             ? "bg-gray-400 hover:bg-gray-600 bg-opacity-20"
                             : "bg-gray-500 cursor-not-allowed"
-                            }`}
-                    >
+                        }`}
+                        >
                         Upload
                     </button>
-                </form>
-            }
+                </form> */}
+            {/* } */}
 
             {/* Display CSV Data in Table */}
-            {showCsvTable && <CSVTable csvData={csvData} setCsvData={setCsvData} />}
-        </div>
+            {/* {showCsvTable && <CSVTable csvData={csvData} setCsvData={setCsvData} />}
+        </div> */}
+        hello
+            </>
     )
 }
 
