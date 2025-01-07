@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 
-function Response2({ res1, jsonData }) {
+function Response3({ res1, jsonData }) {
 
-    const [response2, setResponse2] = useState(null); // To store the API response
-    const [error2, setError2] = useState(null); // To handle errors, if any
+    const [response3, setResponse3] = useState(null); // To store the API response
+    const [error3, setError3] = useState(null); // To handle errors, if any
 
     // Function to send JSON data to the backend
     const handlePostRequest = async () => {
         try {
-            const res = await fetch('https://quant-data-analyser-backend.onrender.com/process_csv_rows', { // Replace with your backend endpoint
+            const res = await fetch('https://quant-data-analyser-backend.onrender.com/process_csv_null_values', { // Replace with your backend endpoint
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -21,10 +21,10 @@ function Response2({ res1, jsonData }) {
             }
 
             const data = await res.json();
-            setResponse2(data); // Update the state with the response data
+            setResponse3(data); // Update the state with the response data
         } catch (err) {
             console.error('Error sending data to backend:', err);
-            setError2(err.message);
+            setError3(err.message);
         }
     };
 
@@ -37,24 +37,24 @@ function Response2({ res1, jsonData }) {
 
     return (
         <div>
-            {response2 && (
+            {response3 && (
                 <div className="p-1 rounded">
                     <span className="font-bold text-green-600">{"Response from Backend==>"}</span>
                     {/* Display number of columns and column names */}
                     <p className='inline'>
-                        <strong className='inline px-2'>Number of Rows:</strong> {response2.number_of_rows},
+                        <strong className='inline px-2'>Null Values found:</strong> {response3.message},
                     </p>
                 </div>
             )}
 
-            {error2 && (
+            {error3 && (
                 <div className="bg-red-500 p-1 rounded">
                     <h3 className="font-bold">Error:</h3>
-                    <p>{error2}</p>
+                    <p>{error3}</p>
                 </div>
             )}
         </div>
     )
 }
 
-export default Response2;
+export default Response3;

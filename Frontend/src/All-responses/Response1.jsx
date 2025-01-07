@@ -38,8 +38,8 @@ function Response1({ res1, jsonData }) {
     return (
         <div>
             {response1 && (
-                <div className="p-4 rounded">
-                    <span className="font-bold text-red-600">{"Response from Backend==>"}</span>
+                <div className="p-1 rounded">
+                    <span className="font-bold text-green-600">{"Response from Backend==>"}</span>
                     {/* Display number of columns and column names */}
                     <p className='inline'>
                         <strong className='inline px-2'>Number of columns:</strong> {response1.number_of_columns},
@@ -57,7 +57,7 @@ function Response1({ res1, jsonData }) {
             )}
 
             {error1 && (
-                <div className="bg-red-500 p-4 rounded">
+                <div className="bg-red-500 p-1 rounded">
                     <h3 className="font-bold">Error:</h3>
                     <p>{error1}</p>
                 </div>

@@ -59,6 +59,60 @@ def process_csv_rows():
         "number_of_rows": number_of_rows
     })
 
+# post route to detect null values
+@app.route('/process_csv_null_values', methods=['POST'])
+def process_csv_null_values():
+    # Get JSON data from the request
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+
+    # Ensure data is a list of rows (JSON array of objects)
+    if not isinstance(data, list):
+        return jsonify({"error": "Invalid data format. Expected a JSON array of objects."}), 400
+
+    # Check for null values (None in Python) in any of the rows
+    null_values_found = False
+
+    for row in data:
+        for key, value in row.items():
+            if value is None or value == "":  # If value is None, it's a null value in Python
+                null_values_found = True
+                break
+
+    # Return response based on whether null values were found
+    if null_values_found:
+        return jsonify({"message": "Null value(s) found in the data."}), 200
+    else:
+        return jsonify({"message": "No null values found in the data."}), 200
+    
+@app.route('/process_csv_remove_null_values', methods=['POST'])
+def process_csv_remove_null_values():
+    # Get JSON data from the request
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+
+    # Ensure data is a list of rows (JSON array of objects)
+    if not isinstance(data, list):
+        return jsonify({"error": "Invalid data format. Expected a JSON array of objects."}), 400
+
+    # Filter out rows with any null (None) or empty values ("")
+    cleaned_data = []
+    
+    for row in data:
+        # Check if the row contains any null or empty values
+        if not any(value is None or value == "" for value in row.values()):
+            cleaned_data.append(row)
+
+    # Return the cleaned data
+    return jsonify({
+        "cleaned_data": cleaned_data
+    })
+
+
 # Run the app
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
