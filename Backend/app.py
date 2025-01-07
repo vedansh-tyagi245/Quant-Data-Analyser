@@ -38,6 +38,26 @@ def process_csv():
             "number_of_columns": 0,
             "column_names": []
         })
+    
+# POST route to process CSV data and return the number of rows
+@app.route('/process_csv_rows', methods=['POST'])
+def process_csv_rows():
+    # Get JSON data from the request
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+
+    # Ensure data is a list of rows (JSON array of objects)
+    if not isinstance(data, list):
+        return jsonify({"error": "Invalid data format. Expected a JSON array of objects."}), 400
+
+    # Get the number of rows in the data
+    number_of_rows = len(data)
+    
+    return jsonify({
+        "number_of_rows": number_of_rows
+    })
 
 # Run the app
 if __name__ == '__main__':
