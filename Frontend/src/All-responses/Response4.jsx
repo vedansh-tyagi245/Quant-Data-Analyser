@@ -22,7 +22,9 @@ function Response4({ res1, jsonData, setJsonData }) {
 
             const data = await res.json();
             setResponse4(data); // Update the state with the response data
-            console.log(data.cleaned_data);
+            setJsonData(data.cleaned_data);
+            // console.log(data.cleaned_data);
+            console.log(jsonData);
         } catch (err) {
             console.error('Error sending data to backend:', err);
             setError4(err.message);
@@ -49,9 +51,9 @@ function Response4({ res1, jsonData, setJsonData }) {
             )}
 
             {error4 && (
-                <div className="bg-red-500 p-1 rounded">
-                    <h3 className="font-bold">Error:</h3>
-                    <p>{error4}</p>
+                <div className="text-red-500 p-1 rounded">
+                    <h3 className="font-bold inline">{"Response from Backend==> "} &nbsp;Error:</h3>
+                    <p className='px-2 inline'>{error4}</p>
                 </div>
             )}
         </div>

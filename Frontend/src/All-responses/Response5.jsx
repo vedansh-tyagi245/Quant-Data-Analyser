@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
-function Response2({ res1, jsonData }) {
+function Response5({ res1, jsonData }) {
 
-    const [response2, setResponse2] = useState(null); // To store the API response
-    const [error2, setError2] = useState(null); // To handle errors, if any
+    const [response5, setResponse5] = useState(null); // To store the API response
+    const [error5, setError5] = useState(null); // To handle errors, if any
 
     // Function to send JSON data to the backend
     const handlePostRequest = async () => {
@@ -21,10 +21,10 @@ function Response2({ res1, jsonData }) {
             }
 
             const data = await res.json();
-            setResponse2(data); // Update the state with the response data
+            setResponse5(data); // Update the state with the response data
         } catch (err) {
             console.error('Error sending data to backend:', err);
-            setError2(err.message);
+            setError5(err.message);
         }
     };
 
@@ -37,24 +37,24 @@ function Response2({ res1, jsonData }) {
 
     return (
         <div>
-            {response2 && (
+            {response5 && (
                 <div className="p-1 rounded">
                     <span className="font-bold text-green-600">{"Response from Backend==>"}</span>
                     {/* Display number of columns and column names */}
                     <p className='inline'>
-                        <strong className='inline px-2'>Number of Rows:</strong> {response2.number_of_rows},
+                        <strong className='inline px-2'>Number of Rows:</strong> {response5.number_of_rows},
                     </p>
                 </div>
             )}
 
-            {error2 && (
+            {error5 && (
                 <div className="text-red-500 p-1 rounded">
                     <h3 className="font-bold inline">{"Response from Backend==> "} &nbsp;Error:</h3>
-                    <p className='px-2 inline'>{error2}</p>
+                    <p className='px-2 inline'>{error5}</p>
                 </div>
             )}
         </div>
     )
 }
 
-export default Response2;
+export default Response5;

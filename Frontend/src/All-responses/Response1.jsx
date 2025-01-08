@@ -57,9 +57,9 @@ function Response1({ res1, jsonData }) {
             )}
 
             {error1 && (
-                <div className="bg-red-500 p-1 rounded">
-                    <h3 className="font-bold">Error:</h3>
-                    <p>{error1}</p>
+                <div className="text-red-500 p-1 rounded">
+                    <h3 className="font-bold inline">{"Response from Backend==> "} &nbsp;Error:</h3>
+                    <p className='px-2 inline'>{error1}</p>
                 </div>
             )}
         </div>
