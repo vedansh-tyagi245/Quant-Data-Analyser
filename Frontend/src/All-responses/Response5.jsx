@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
-function Response5({ res1, jsonData }) {
+function Response5({ res1, jsonData, setSuccess5 }) {
 
     const [response5, setResponse5] = useState(null); // To store the API response
     const [error5, setError5] = useState(null); // To handle errors, if any
+    const [currentTime, setCurrentTime] = useState(''); // To store the current time
+
 
     // Function to send JSON data to the backend
     const handlePostRequest = async () => {
@@ -22,6 +24,7 @@ function Response5({ res1, jsonData }) {
 
             const data = await res.json();
             setResponse5(data); // Update the state with the response data
+            setSuccess5(true);
         } catch (err) {
             console.error('Error sending data to backend:', err);
             setError5(err.message);
@@ -35,11 +38,21 @@ function Response5({ res1, jsonData }) {
         }
     }, [res1]); // The useEffect hook will run every time res1 changes
 
+    // Function to get current time in desired format
+    const getCurrentTime = () => {
+        const now = new Date();
+        return now.toLocaleTimeString(); // You can adjust the format if needed
+    };
+
+    useEffect(() => {
+        setCurrentTime(getCurrentTime()); // Set the current time when the component is mounted
+    }, []);
+
     return (
         <div>
             {response5 && (
                 <div className="p-1 rounded">
-                    <span className="font-bold text-green-600">{"Response from Backend==>"}</span>
+                    <span className="font-bold text-green-600">{`${currentTime} : `} &nbsp; &nbsp; {`Response from Backend ==>`}</span>
                     {/* Display number of columns and column names */}
                     <p className='inline'>
                         <strong className='inline px-2'>Number of Rows:</strong> {response5.number_of_rows},

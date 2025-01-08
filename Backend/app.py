@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import re;
 
 # Create the Flask app
 app = Flask(__name__)
@@ -112,6 +113,47 @@ def process_csv_remove_null_values():
         "cleaned_data": cleaned_data
     })
 
+@app.route('/process_csv_clean_numeric_fields', methods=['POST'])
+def process_csv_clean_numeric_fields():
+    import re  # Ensure re module is imported
+
+    # Get JSON data from the request
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+
+    # Ensure data is a list of rows (JSON array of objects)
+    if not isinstance(data, list):
+        return jsonify({"error": "Invalid data format. Expected a JSON array of objects."}), 400
+
+    # Fields to clean
+    numeric_fields = ['Open', 'Low', 'High', 'Close', 'Volume']
+
+    # Function to clean a value
+    def clean_numeric(value):
+        if isinstance(value, str):
+            # Remove unwanted characters and extract numeric value (only digits, '.' and '-')
+            cleaned_value = re.sub(r'[^\d.-]', '', value)  # Allow only digits, '.' and '-'
+            try:
+                return float(cleaned_value) if cleaned_value else None
+            except ValueError:
+                return None
+        elif isinstance(value, (int, float)):
+            return value
+        return None  # If the value can't be converted, return None
+
+    # Clean the data
+    cleaned_data = []
+    for row in data:
+        cleaned_row = row.copy()  # Work on a copy to avoid modifying the original
+        for field in numeric_fields:
+            if field in cleaned_row:
+                cleaned_row[field] = clean_numeric(str(cleaned_row[field]))
+        cleaned_data.append(cleaned_row)
+
+    # Return the cleaned data only
+    return jsonify({"cleaned_data": cleaned_data})
 
 # Run the app
 if __name__ == '__main__':

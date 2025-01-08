@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 
-function Response4({ res1, jsonData, setJsonData, setSuccess4 }) {
+function Response6({ res1, jsonData, setJsonData, setSuccess6 }) {
 
-    const [response4, setResponse4] = useState(null); // To store the API response
-    const [error4, setError4] = useState(null); // To handle errors, if any
+    const [response6, setResponse6] = useState(null); // To store the API response
+    const [error6, setError6] = useState(null); // To handle errors, if any
     const [currentTime, setCurrentTime] = useState(''); // To store the current time
 
 
     // Function to send JSON data to the backend
     const handlePostRequest = async () => {
         try {
-            const res = await fetch('https://quant-data-analyser-backend.onrender.com/process_csv_remove_null_values', { // Replace with your backend endpoint
+            const res = await fetch('https://quant-data-analyser-backend.onrender.com/process_csv_clean_numeric_fields', { // Replace with your backend endpoint
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -23,14 +23,14 @@ function Response4({ res1, jsonData, setJsonData, setSuccess4 }) {
             }
 
             const data = await res.json();
-            setResponse4(data); // Update the state with the response data
+            setResponse6(data); // Update the state with the response data
             setJsonData(data.cleaned_data);
-            // console.log(data.cleaned_data);
-            console.log(jsonData);
-            setSuccess4(true);
+            console.log(data.cleaned_data);
+            setSuccess6(true);
+
         } catch (err) {
             console.error('Error sending data to backend:', err);
-            setError4(err.message);
+            setError6(err.message);
         }
     };
 
@@ -53,24 +53,25 @@ function Response4({ res1, jsonData, setJsonData, setSuccess4 }) {
 
     return (
         <div>
-            {response4 && (
+            {response6 && (
                 <div className="p-1 rounded">
                     <span className="font-bold text-green-600">{`${currentTime} : `} &nbsp; &nbsp; {`Response from Backend ==>`}</span>
                     {/* Display number of columns and column names */}
                     <p className='inline'>
-                        <strong className='inline px-2'>Cleaned Data by removing rows having NULL values</strong>
+                        <strong className='inline px-2'>Removing any characters from High, Low, Close, Volume if present:</strong>
                     </p>
+
                 </div>
             )}
 
-            {error4 && (
+            {error6 && (
                 <div className="text-red-500 p-1 rounded">
                     <h3 className="font-bold inline">{"Response from Backend==> "} &nbsp;Error:</h3>
-                    <p className='px-2 inline'>{error4}</p>
+                    <p className='px-2 inline'>{error6}</p>
                 </div>
             )}
         </div>
     )
 }
 
-export default Response4;
+export default Response6;
