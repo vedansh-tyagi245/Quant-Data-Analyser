@@ -40,7 +40,13 @@ function BuildLogs({ jsonData, setJsonData }) {
     }, [step]);
 
     return (
-        <div className='text-white overflow-y-auto max-h-[34vh]' ref={containerRef}>
+        <div
+            className="text-white overflow-y-auto overflow-x-auto max-h-[34vh] max-w-[90vw] whitespace-nowrap"
+            ref={containerRef}
+            style={{
+                display: 'flex',
+                flexDirection: 'column', // Align responses vertically 
+            }}>
 
             {/* Tell number of columns and column names */}
             {step >= 1 && <Response1 res1={true} jsonData={jsonData} setSuccess1={setSuccess1} />}
