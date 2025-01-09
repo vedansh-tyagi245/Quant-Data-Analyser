@@ -28,12 +28,12 @@ function HomePage({ link, setLink }) {
                         <div className="btn flex flex-wrap justify-center gap-4 mt-6">
                             <button
                                 type="button"
-                                className='text-violet-800 px-5 py-1 bg-[rgb(255,255,255)] font-sans rounded-lg text-lg sm:text-xl lg:text-2xl hover:bg-violet-300 transition-all'>
+                                className='text-violet-800 px-5 py-1 bg-[rgb(255,255,255)] font-sans rounded-full text-lg sm:text-xl lg:text-2xl hover:bg-violet-300 transition-all bg-opacity-90'>
                                 View Tutorial
                             </button>
                             <UploadFile showAnalyze={showAnalyze} setShowAnalyze={setShowAnalyze} csvData={csvData} setCsvData={setCsvData} jsonData={jsonData} setJsonData={setJsonData} />
-
                         </div>
+                        Choose only csv file
                     </div>
                 </div>
             }

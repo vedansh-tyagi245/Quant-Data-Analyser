@@ -8,7 +8,7 @@ import Response6 from '../All-responses/Response6';
 import Response7 from '../All-responses/Response7';
 import Response8 from '../All-responses/Response8';
 
-function BuildLogs({ jsonData, setJsonData }) {
+function BuildLogs({ jsonData, setJsonData, setShowDashboard }) {
 
     const containerRef = useRef(null); // Create a reference to the container div
 
@@ -71,6 +71,16 @@ function BuildLogs({ jsonData, setJsonData }) {
 
             {/* Changing Date format to DD-MM-YYYY */}
             {step >= 1 && success7 && <Response8 res1={true} jsonData={jsonData} setJsonData={setJsonData} setSuccess8={setSuccess8} />}
+
+            {/* Button to trigger dashboard visibility */}
+            {success8 && (
+                <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded w-[100px] mx-auto"
+                    onClick={() => setShowDashboard(true)}
+                >
+                    Analyze
+                </button>
+            )}
 
         </div>
     );
