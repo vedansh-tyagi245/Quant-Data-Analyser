@@ -1,14 +1,10 @@
 import React, { useState } from 'react'
 import Papa from 'papaparse';  // You need to install papaparse for CSV parsing
-import CSVTable from '../CSV-Table-components/CSVTable';
 import Navbar from '../home-components/Navbar';
 import Analyze from '../Analises-container/Analyze';
 
-function UploadFile({ link, setLink }) {
+function UploadFile({ link, setLink, showAnalyze, setShowAnalyze, csvData, setCsvData, jsonData, setJsonData }) {
     const [file, setFile] = useState(null);
-    const [csvData, setCsvData] = useState(null);
-    const [jsonData, setJsonData] = useState(null);
-    const [showAnalyze, setShowAnalyze] = useState(false);
 
     // Handle file selection
     const handleFileChange = (e) => {
@@ -43,24 +39,23 @@ function UploadFile({ link, setLink }) {
 
     return (
         <>
-            <div className='bg-grid-white h-[100vh]'>
-                <Navbar />
+            <div className=''>
 
                 {/* Full form container */}
                 {!showAnalyze && <div>
 
-                    <form className="flex items-end space-x-1 justify-center h-[35vh]">
+                    <form className="flex items-end space-x-1 justify-center">
 
                         {/* Choose file button */}
-                        <label className="block bg-gray-700 bg-opacity-30 rounded-l-full p-4 h-16">
-                            <input type="file" accept=".csv" onChange={handleFileChange} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-300" />
+                        <label className="block bg-gray-700 bg-opacity-30 rounded-l-full p-4 h-16 border border-gray-500">
+                        <input type="file" accept=".csv" onChange={handleFileChange} className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-300" />
                         </label>
 
                         {/* Upload Button */}
                         <button
                             onClick={handleUpload}
                             disabled={!file} // Disable the button if no file is selected
-                            className={`py-4 px-4 h-16 rounded-r-3xl transition text-white ${file
+                            className={`px-4 h-16 rounded-r-3xl transition text-white ${file
                                 ? "bg-gray-400 hover:bg-gray-600 bg-opacity-20"
                                 : "bg-gray-500 cursor-not-allowed"
                                 }`}
@@ -68,13 +63,9 @@ function UploadFile({ link, setLink }) {
                             Upload
                         </button>
                     </form>
-                    <div className='text-purple-600 text-center'>Choose only csv file</div>
+                    {/* <div className='text-purple-600 text-center text-sm'>Choose only csv file</div> */}
                 </div>
-
                 }
-
-                {/* Display CSV Data in Table */}
-                {showAnalyze && <Analyze csvData={csvData} setCsvData={setCsvData} jsonData={jsonData} setJsonData={setJsonData} />}
             </div>
         </>
     )
