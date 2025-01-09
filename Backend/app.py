@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import re;
+from datetime import datetime
 
 # Create the Flask app
 app = Flask(__name__)
@@ -154,6 +155,94 @@ def process_csv_clean_numeric_fields():
 
     # Return the cleaned data only
     return jsonify({"cleaned_data": cleaned_data})
+
+@app.route('/process_csv_convert_date_format', methods=['POST'])
+def process_csv_convert_date_format():
+    from datetime import datetime
+
+    # Get JSON data from the request
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+
+    # Ensure data is a list of rows (JSON array of objects)
+    if not isinstance(data, list):
+        return jsonify({"error": "Invalid data format. Expected a JSON array of objects."}), 400
+
+    # Function to convert date format
+    def convert_date_format(value):
+        if isinstance(value, str):
+            # Replace '/' with '-' to standardize separators
+            standardized_value = value.replace('-', '/').strip()
+        return standardized_value  # Return the value unchanged if it's not a string or doesn't match any format
+
+    # Convert the data
+    converted_data = []
+    for row in data:
+        converted_row = row.copy()  # Work on a copy to avoid modifying the original
+        for key, value in converted_row.items():
+            if isinstance(value, str):
+                converted_row[key] = convert_date_format(value)
+        converted_data.append(converted_row)
+
+    # Return the converted data only
+    return jsonify({"converted_data": converted_data})
+
+@app.route('/process_csv_convert_date_format_2', methods=['POST'])
+def process_csv_convert_date_format_conversion():
+    # Get JSON data from the request
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+
+    # Ensure data is a list of rows (JSON array of objects)
+    if not isinstance(data, list):
+        return jsonify({"error": "Invalid data format. Expected a JSON array of objects."}), 400
+
+    # Function to check if a date is in MM-DD-YYYY format
+    def is_mm_dd_yyyy(date_str):
+        try:
+            datetime.strptime(date_str, '%m/%d/%Y')
+            return True
+        except ValueError:
+            return False
+
+    # Function to convert MM-DD-YYYY to DD-MM-YYYY
+    def convert_mm_dd_to_dd_mm(date_str):
+        date_obj = datetime.strptime(date_str, '%m/%d/%Y')
+        return date_obj.strftime('%d/%m/%Y')
+
+    # Check date format for each row in the first column (assuming the first column contains date values)
+    first_row = data[0]
+    all_dates_are_mm_dd = True
+    column_name = None
+
+    # Identify the column with dates and verify if all dates are in MM-DD-YYYY
+    for key, value in first_row.items():
+        if isinstance(value, str) and is_mm_dd_yyyy(value):
+            column_name = key
+            for row in data:
+                date_value = row.get(key)
+                if not is_mm_dd_yyyy(date_value):
+                    all_dates_are_mm_dd = False
+                    break
+            break
+
+    if column_name is None:
+        return jsonify({"error": "No valid date column found."}), 400
+
+    # If even one date is not in MM-DD-YYYY, assume the column is in DD-MM-YYYY
+    if all_dates_are_mm_dd:
+        # Convert the entire column from MM-DD-YYYY to DD-MM-YYYY
+        for row in data:
+            date_value = row[column_name]
+            row[column_name] = convert_mm_dd_to_dd_mm(date_value)
+
+    # Return the converted data
+    return jsonify({"converted_data": data})
+
 
 # Run the app
 if __name__ == '__main__':

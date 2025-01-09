@@ -5,6 +5,8 @@ import Response3 from '../All-responses/Response3';
 import Response4 from '../All-responses/Response4';
 import Response5 from '../All-responses/Response5';
 import Response6 from '../All-responses/Response6';
+import Response7 from '../All-responses/Response7';
+import Response8 from '../All-responses/Response8';
 
 function BuildLogs({ jsonData, setJsonData }) {
 
@@ -24,10 +26,12 @@ function BuildLogs({ jsonData, setJsonData }) {
     const [success4, setSuccess4] = useState(false);
     const [success5, setSuccess5] = useState(false);
     const [success6, setSuccess6] = useState(false);
+    const [success7, setSuccess7] = useState(false);
+    const [success8, setSuccess8] = useState(false);
 
     useEffect(() => {
         // Only trigger the next component after 1 second delay
-        if (step < 6) {
+        if (step < 8) {
             const timeout = setTimeout(() => {
                 setStep(step + 1);
             }, 1000); // Adjust the time delay as per your preference (1 second here)
@@ -42,19 +46,25 @@ function BuildLogs({ jsonData, setJsonData }) {
             {step >= 1 && <Response1 res1={true} jsonData={jsonData} setSuccess1={setSuccess1} />}
 
             {/* Number of rows */}
-            {step >= 2 && <Response2 res1={true} jsonData={jsonData} setSuccess2={setSuccess2} />}
+            {step >= 1 && success1 && <Response2 res1={true} jsonData={jsonData} setSuccess2={setSuccess2} />}
 
             {/* Null values found */}
-            {step >= 3 && <Response3 res1={true} jsonData={jsonData} setSuccess3={setSuccess3} />}
+            {step >= 1 && success2 && <Response3 res1={true} jsonData={jsonData} setSuccess3={setSuccess3} />}
 
             {/* Cleaning by removing null values */}
-            {step >= 4 && <Response4 res1={true} jsonData={jsonData} setJsonData={setJsonData} setSuccess4={setSuccess4} />}
+            {step >= 1 && success3 && <Response4 res1={true} jsonData={jsonData} setJsonData={setJsonData} setSuccess4={setSuccess4} />}
 
             {/* Printing new number of rows */}
-            {step >= 5 && <Response5 res1={true} jsonData={jsonData} setSuccess5={setSuccess5} />}
+            {step >= 1 && success4 && <Response5 res1={true} jsonData={jsonData} setSuccess5={setSuccess5} />}
 
             {/* Removing any character present in Low,high,close, volume only int or double numbers allowed */}
-            {step >= 6 && <Response6 res1={true} jsonData={jsonData} setJsonData={setJsonData} setSuccess6={setSuccess6} />}
+            {step >= 1 && success5 && <Response6 res1={true} jsonData={jsonData} setJsonData={setJsonData} setSuccess6={setSuccess6} />}
+
+            {/* Changing / to - in all the dates entries */}
+            {step >= 1 && success6 && <Response7 res1={true} jsonData={jsonData} setJsonData={setJsonData} setSuccess7={setSuccess7} />}
+
+            {/* Changing Date format to DD-MM-YYYY */}
+            {step >= 1 && success7 && <Response8 res1={true} jsonData={jsonData} setJsonData={setJsonData} setSuccess8={setSuccess8} />}
 
         </div>
     );

@@ -51,8 +51,8 @@ function Response5({ res1, jsonData, setSuccess5 }) {
     return (
         <div>
             {response5 && (
-                <div className="p-1 rounded">
-                    <span className="font-bold text-green-600">{`${currentTime} : `} &nbsp; &nbsp; {`Response from Backend ==>`}</span>
+                <div className="p-1 rounded font-mono">
+                    <span className="font-bold text-green-600">{`${currentTime} : `} {`Response from Backend ==>`}</span>
                     {/* Display number of columns and column names */}
                     <p className='inline'>
                         <strong className='inline px-2'>Number of Rows:</strong> {response5.number_of_rows},
@@ -61,8 +61,8 @@ function Response5({ res1, jsonData, setSuccess5 }) {
             )}
 
             {error5 && (
-                <div className="text-red-500 p-1 rounded">
-                    <h3 className="font-bold inline">{"Response from Backend==> "} &nbsp;Error:</h3>
+                <div className="text-red-500 p-1 rounded font-mono">
+                    <h3 className="font-bold inline">{`${currentTime} : `} {`Response from Backend ==>`}&nbsp;Error:</h3>
                     <p className='px-2 inline'>{error5}</p>
                 </div>
             )}
