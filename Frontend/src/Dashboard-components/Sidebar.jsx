@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Use this if you have routing set up
 
-function Sidebar({ setSection }) {
+function Sidebar({ section, setSection }) {
   const [isOpen, setIsOpen] = useState(false); // State to track sidebar visibility
 
   const toggleSidebar = () => {
@@ -13,11 +13,11 @@ function Sidebar({ setSection }) {
       {/* Sidebar */}
       <div
         className={`fixed lg:relative top-0 left-0 h-full bg-gray-800 text-white flex flex-col transform lg:translate-x-0 sm:mt-[63px] md:mt-[75px] lg:mt-[0px] ${isOpen ? 'translate-x-0' : '-translate-x-full bg-opacity-20'
-          } transition-transform duration-300 ease-in-out z-40 w-[270px]`}
+          } transition-transform duration-300 ease-in-out z-40 w-[290px]`}
         style={{ top: '0px' }} // Adjust to match your navbar height
       >
         {/* Logo Section */}
-        <div className="p-4 text-center text-lg font-bold bg-gray-900 ">
+        <div className="p-4 text-center text-lg font-bold bg-gray-900">
           Dashboard
         </div>
 
@@ -25,23 +25,22 @@ function Sidebar({ setSection }) {
         <nav className="flex-1 p-4">
           <ul className="space-y-4">
             <li>
-              <div className="hover:text-blue-400 cursor-pointer" onClick={() => {setSection('Dataset')}}>
-                📊 Dataset
+              <div className={`hover:text-blue-400 cursor-pointer rounded-lg ${section === 'Dataset' ? 'font-bold bg-gray-600' : ''}`} onClick={() => { setSection('Dataset'); }}>📊 Dataset</div>
+
+            </li>
+            <li>
+              <div className={`hover:text-blue-400 cursor-pointer rounded-lg ${section === 'StockPerformance' ? 'font-bold bg-gray-600' : ''}`} onClick={() => { setSection('StockPerformance') }}>
+                📈 Stock Performance
               </div>
             </li>
             <li>
-              <div className="hover:text-blue-400 cursor-pointer" onClick={() => {setSection('StockPerformance')}}>
-              📈 Stock Performance
+              <div className={`hover:text-blue-400 cursor-pointer rounded-lg ${section === 'DemoTrading' ? 'font-bold bg-gray-600' : ''}`} onClick={() => { setSection('DemoTrading') }}>
+                💼 Demo Trading
               </div>
             </li>
             <li>
-              <div className="hover:text-blue-400 cursor-pointer" onClick={() => {setSection('DemoTrading')}}>
-              💼 Demo Trading
-              </div>
-            </li>
-            <li>
-              <div className="hover:text-blue-400 cursor-pointer" onClick={() => {setSection('Null')}}>
-              🔒premium feature{"("}Upcoming{")"}
+              <div className={`hover:text-blue-400 cursor-pointer rounded-lg ${section === 'Null' ? 'font-bold bg-gray-600' : ''}`} onClick={() => { setSection('Null') }}>
+                🔒premium feature{"("}Upcoming{")"}
               </div>
             </li>
           </ul>

@@ -11,14 +11,19 @@ function Dashboard({ jsonData, setJsonData }) {
   return (
     <div className="flex h-[89vh]">
       {/* Sidebar */}
-      <Sidebar setSection={setSection} />
+      <Sidebar section={section} setSection={setSection} />
 
       {/* Main Content Area */}
       <div className="flex-1 bg-gray-100 bg-opacity-10 text-white">
         {/* Add your dashboard content here */}
         {section === "Dataset" && <Dataset jsonData={jsonData} />}
-        {section === "StockPerformance" && <StockPerformance jsonData={jsonData} setJsonData={setJsonData}/>}
-        {section === "DemoTrading" && <DemoTrading jsonData={jsonData}/>}
+        {section === "StockPerformance" && <StockPerformance jsonData={jsonData} setJsonData={setJsonData} />}
+        {section === "DemoTrading" && <DemoTrading jsonData={jsonData} />}
+        {section === "Null" && <div className='flex justify-center items-center h-[80vh]'>
+          <div className="h-[20vh] w-[20vw] text-center bg-gray-600 bg-opacity-25 rounded-3xl pt-[5vh] font-bold font-mono">
+            This feature is under construction. It will be available only to our premium members.
+          </div>
+        </div>}
       </div>
     </div>
   );
