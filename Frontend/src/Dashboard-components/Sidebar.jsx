@@ -13,7 +13,7 @@ function Sidebar({ setSection }) {
       {/* Sidebar */}
       <div
         className={`fixed lg:relative top-0 left-0 h-full bg-gray-800 text-white flex flex-col transform lg:translate-x-0 sm:mt-[63px] md:mt-[75px] lg:mt-[0px] ${isOpen ? 'translate-x-0' : '-translate-x-full bg-opacity-20'
-          } transition-transform duration-300 ease-in-out z-40 w-[250px]`}
+          } transition-transform duration-300 ease-in-out z-40 w-[270px]`}
         style={{ top: '0px' }} // Adjust to match your navbar height
       >
         {/* Logo Section */}
@@ -25,29 +25,24 @@ function Sidebar({ setSection }) {
         <nav className="flex-1 p-4">
           <ul className="space-y-4">
             <li>
-              <div className="hover:text-blue-400" onClick={() => {setSection('Dataset')}}>
+              <div className="hover:text-blue-400 cursor-pointer" onClick={() => {setSection('Dataset')}}>
                 📊 Dataset
               </div>
             </li>
             <li>
-              <Link to="/stock-performance" className="hover:text-blue-400">
-                📈 Stock Performance
-              </Link>
+              <div className="hover:text-blue-400 cursor-pointer" onClick={() => {setSection('StockPerformance')}}>
+              📈 Stock Performance
+              </div>
             </li>
             <li>
-              <Link to="/portfolio" className="hover:text-blue-400">
-                💼 Portfolio
-              </Link>
+              <div className="hover:text-blue-400 cursor-pointer" onClick={() => {setSection('DemoTrading')}}>
+              💼 Demo Trading
+              </div>
             </li>
             <li>
-              <Link to="/analytics" className="hover:text-blue-400">
-                📑 Analytics
-              </Link>
-            </li>
-            <li>
-              <Link to="/settings" className="hover:text-blue-400">
-                ⚙️ Settings
-              </Link>
+              <div className="hover:text-blue-400 cursor-pointer" onClick={() => {setSection('Null')}}>
+              🔒premium feature{"("}Upcoming{")"}
+              </div>
             </li>
           </ul>
         </nav>

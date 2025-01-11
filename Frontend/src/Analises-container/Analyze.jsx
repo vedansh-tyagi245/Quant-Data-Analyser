@@ -29,7 +29,7 @@ function Analyze({ csvData, setCsvData, jsonData, setJsonData }) {
       {
         showDashboard && (
           <div>
-            <Dashboard jsonData={jsonData}/>
+            <Dashboard jsonData={jsonData} setJsonData={setJsonData}/>
           </div>
         )
       }
