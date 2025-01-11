@@ -76,8 +76,8 @@ function HomePage({ link, setLink }) {
                         <div className="restrictions p-1 bg-gray-800 rounded-lg shadow-lg text-white mt-3 hidden md:block">
                             <isindex className="block mb-2 text-blue-500">Please adhere to the following restrictions:</isindex>
                             <ul className="list-disc pl-6 space-y-0">
-                                <li className="text-md text-gray-300">1. Column Names should be exactly the above ones with correct upper and lowercase characters</li>
-                                <li className="text-md text-gray-300">2. Date can be any DD/MM/YYYY, DD-MM-YYYY, MM/DD/YYYY, or MM-DD/YYYY</li>
+                                <li className="text-md text-gray-300">Column Names should be exactly the above ones with correct upper and lowercase characters</li>
+                                <li className="text-md text-gray-300">Date can be any DD/MM/YYYY, DD-MM-YYYY, MM/DD/YYYY, or MM-DD/YYYY</li>
                             </ul>
                         </div>
                     </div>

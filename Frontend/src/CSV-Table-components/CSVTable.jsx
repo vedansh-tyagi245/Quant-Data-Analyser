@@ -6,7 +6,7 @@ function CSVTable({ csvData, setCsvData }) {
             {/* Display CSV Data in Table */}
             {csvData && (
                 <div
-                    className="mt-1 overflow-y-auto overflow-x-auto max-w-[90vw] max-h-[50vh] p-0 border rounded-md text-center mx-auto"
+                    className="mt-1 overflow-y-auto overflow-x-auto max-w-[90vw] max-h-[40vh] p-0 border rounded-md text-center mx-auto"
                     style={{ boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
                 >
                     <table className="table-auto w-full">
