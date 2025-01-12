@@ -73,7 +73,7 @@ function HomePage({ link, setLink }) {
                         </div>
 
                         {/* Restrictions Section */}
-                        <div className="restrictions p-1 bg-gray-800 rounded-lg shadow-lg text-white mt-3 hidden md:block">
+                        <div className="restrictions p-1 bg-gray-800 rounded-lg shadow-lg text-white mt-3 hidden md:block bg-opacity-50">
                             <isindex className="block mb-2 text-blue-500">Please adhere to the following restrictions:</isindex>
                             <ul className="list-disc pl-6 space-y-0">
                                 <li className="text-md text-gray-300">Column Names should be exactly the above ones with correct upper and lowercase characters</li>

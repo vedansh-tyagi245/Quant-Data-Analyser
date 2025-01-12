@@ -48,6 +48,15 @@ function BuildLogs({ jsonData, setJsonData, setShowDashboard }) {
                 flexDirection: 'column', // Align responses vertically 
             }}>
 
+            <div>
+                {!success1 && (
+                    <div className="processing flex flex-col items-center justify-center">
+                        This might take a few seconds as our backend is deployed on a free versioned platform
+                        <img src="1494.gif" alt="Loading..." className='bg-gray-700 h-16 w-16' />
+                    </div>
+                )}
+            </div>
+
             {/* Tell number of columns and column names */}
             {step >= 1 && <Response1 res1={true} jsonData={jsonData} setSuccess1={setSuccess1} />}
 
