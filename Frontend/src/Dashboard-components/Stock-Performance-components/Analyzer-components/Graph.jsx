@@ -16,7 +16,11 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 function Graph({ jsonData }) {
     if (!jsonData || jsonData.length === 0) {
-        return <div>No data available to display the graph.</div>;
+        return (
+            <div className="text-center text-gray-300 bg-gray-900 p-6 rounded-lg shadow-md">
+                No data available to display the graph.
+            </div>
+        );
     }
 
     // Prepare data for the chart
@@ -57,10 +61,17 @@ function Graph({ jsonData }) {
         plugins: {
             legend: {
                 position: 'top',
+                labels: {
+                    color: '#d1d5db', // Light gray for dark theme
+                },
             },
             title: {
                 display: true,
                 text: 'Stock Price Analysis (Open, High, Low)',
+                color: '#f3f4f6', // Light gray for dark theme
+                font: {
+                    size: 18,
+                },
             },
         },
         scales: {
@@ -68,23 +79,48 @@ function Graph({ jsonData }) {
                 title: {
                     display: true,
                     text: 'Date',
+                    color: '#e5e7eb', // Light gray for x-axis label
+                },
+                ticks: {
+                    color: '#9ca3af', // Light gray for x-axis ticks
+                },
+                grid: {
+                    color: '#374151', // Subtle gridlines for x-axis
                 },
             },
             y: {
                 title: {
                     display: true,
                     text: 'Price',
+                    color: '#e5e7eb', // Light gray for y-axis label
+                },
+                ticks: {
+                    color: '#9ca3af', // Light gray for y-axis ticks
+                },
+                grid: {
+                    color: '#374151', // Subtle gridlines for y-axis
                 },
             },
         },
     };
 
     return (
-        <div className="p-6 bg-gray-900 bg-opacity-0">
-            <h1 className="text-xl font-bold mb-4 text-center">Stock Price Graph</h1>
-            <div className="flex justify-left h-[63vh]">
-                <Line data={chartData} options={options} />
-                <div className="notepad font-mono  flex items-center">As you can see that High {">="} open it means if you successfully determine the peak point that you will having profits everyday</div>
+        <div className="p-6 bg-gray-900 rounded-lg shadow-md">
+            <h1 className="text-2xl font-bold mb-6 text-center text-gray-200">Stock Price Graph</h1>
+            <div className="flex justify-between h-[58vh]">
+                <div className="flex-grow">
+                    <Line data={chartData} options={options} />
+                </div>
+                <div className="w-1/3 ml-6 bg-gray-800 p-4 rounded-lg shadow-md text-gray-300 font-mono text-sm">
+                    <h2 className="text-lg font-semibold text-gray-200 mb-4">
+                        Insights
+                    </h2>
+                    <p>
+                        As you can see, the <span className="font-bold text-green-400">High</span> is usually 
+                        <span className="font-bold text-green-400"> ≥ Open</span>. This means if you can successfully 
+                        determine the peak point, you could achieve profits consistently.
+                    </p>
+                </div>
             </div>
         </div>
     );

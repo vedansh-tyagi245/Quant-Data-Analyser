@@ -52,52 +52,68 @@ function Stock_analyze({ jsonData }) {
     return (
         <div className="p-6 bg-gray-900 bg-opacity-0">
             {/* Buttons */}
-            <div className="flex justify-center space-x-4">
+            <div className="flex justify-center space-x-4 mb-5">
                 <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-bold py-2 px-6 rounded-lg shadow-lg transform transition-transform duration-200 hover:scale-105"
                     onClick={() => setContent('Statistics')}
                 >
                     Statistics
                 </button>
                 <button
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                    className="bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-bold py-2 px-6 rounded-lg shadow-lg transform transition-transform duration-200 hover:scale-105"
                     onClick={() => setContent('Graph')}
                 >
                     Graph
                 </button>
             </div>
+
             {content == 'Statistics' && <div className="statistics">
 
                 <h1 className="text-2xl font-bold mb-4">Stock Analysis</h1>
 
                 {/* Summary Statistics */}
                 <div className="mb-6">
-                    <h2 className="text-xl font-semibold mb-2">Summary Statistics</h2>
-                    <table className="table-auto border-collapse border border-gray-400 w-full text-left">
-                        <thead>
+                    <h2 className="text-xl font-semibold mb-4 text-gray-200 text-center">Summary Statistics</h2>
+                    <table className="table-auto border-collapse w-full text-left bg-gray-800 shadow-lg rounded-lg overflow-hidden">
+                        <thead className="bg-gradient-to-r from-gray-700 via-gray-800 to-gray-700 text-gray-300">
                             <tr>
-                                <th className="border border-gray-400 px-4 py-2">Metric</th>
-                                <th className="border border-gray-400 px-4 py-2">Mean</th>
-                                <th className="border border-gray-400 px-4 py-2">Median</th>
-                                <th className="border border-gray-400 px-4 py-2">Min</th>
-                                <th className="border border-gray-400 px-4 py-2">Max</th>
-                                <th className="border border-gray-400 px-4 py-2">Std Dev</th>
+                                <th className="px-6 py-4 font-bold text-sm tracking-wider uppercase border-b border-gray-700">Metric</th>
+                                <th className="px-6 py-4 font-bold text-sm tracking-wider uppercase border-b border-gray-700">Mean</th>
+                                <th className="px-6 py-4 font-bold text-sm tracking-wider uppercase border-b border-gray-700">Median</th>
+                                <th className="px-6 py-4 font-bold text-sm tracking-wider uppercase border-b border-gray-700">Min</th>
+                                <th className="px-6 py-4 font-bold text-sm tracking-wider uppercase border-b border-gray-700">Max</th>
+                                <th className="px-6 py-4 font-bold text-sm tracking-wider uppercase border-b border-gray-700">Std Dev</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {Object.entries(summaryStats).map(([key, stats]) => (
-                                <tr key={key}>
-                                    <td className="border border-gray-400 px-4 py-2">{key}</td>
-                                    <td className="border border-gray-400 px-4 py-2">{stats.mean.toFixed(2)}</td>
-                                    <td className="border border-gray-400 px-4 py-2">{stats.median.toFixed(2)}</td>
-                                    <td className="border border-gray-400 px-4 py-2">{stats.min.toFixed(2)}</td>
-                                    <td className="border border-gray-400 px-4 py-2">{stats.max.toFixed(2)}</td>
-                                    <td className="border border-gray-400 px-4 py-2">{stats.stdDev.toFixed(2)}</td>
+                            {Object.entries(summaryStats).map(([key, stats], index) => (
+                                <tr
+                                    key={key}
+                                    className={`${index % 2 === 0 ? "bg-gray-800" : "bg-gray-700"
+                                        } hover:bg-gray-600 transition-colors duration-200`}
+                                >
+                                    <td className="px-6 py-4 text-gray-300 border-b border-gray-700 font-mono">{key}</td>
+                                    <td className="px-6 py-4 text-gray-300 border-b border-gray-700 font-mono">
+                                        {stats.mean.toFixed(2)}
+                                    </td>
+                                    <td className="px-6 py-4 text-gray-300 border-b border-gray-700 font-mono">
+                                        {stats.median.toFixed(2)}
+                                    </td>
+                                    <td className="px-6 py-4 text-gray-300 border-b border-gray-700 font-mono">
+                                        {stats.min.toFixed(2)}
+                                    </td>
+                                    <td className="px-6 py-4 text-gray-300 border-b border-gray-700 font-mono">
+                                        {stats.max.toFixed(2)}
+                                    </td>
+                                    <td className="px-6 py-4 text-gray-300 border-b border-gray-700 font-mono">
+                                        {stats.stdDev.toFixed(2)}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
+
             </div>}
 
             {content == 'Graph' && <div className="graph">

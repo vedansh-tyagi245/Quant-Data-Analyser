@@ -84,11 +84,12 @@ function BuildLogs({ jsonData, setJsonData, setShowDashboard }) {
             {/* Button to trigger dashboard visibility */}
             {success8 && (
                 <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded w-[100px] mx-auto"
-                    onClick={() => setShowDashboard(true)}
-                >
-                    Analyze
-                </button>
+                className="bg-blue-600 hover:bg-blue-800 text-white font-semibold py-2 px-6 mt-4 rounded-full shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 w-[50vw] mx-auto"
+                onClick={() => setShowDashboard(true)}
+            >
+                Analyze
+            </button>
+            
             )}
 
         </div>

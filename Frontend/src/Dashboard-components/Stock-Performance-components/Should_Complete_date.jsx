@@ -62,7 +62,7 @@ function Should_Complete_date({ jsonData, setJsonData }) {
     // Find missing dates and fill them with averages in decreasing order
     const filledData = [...jsonData];
     for (let d = new Date(maxDate); d >= minDate; d.setDate(d.getDate() - 1)) {
-      const dateString = d.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+      const dateString = d.toISOString().split('T')[0];
       if (!dateSet.has(dateString)) {
         filledData.push({
           Date: formatDate(new Date(d)), // Convert back to DD/MM/YYYY
@@ -85,18 +85,18 @@ function Should_Complete_date({ jsonData, setJsonData }) {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-[80vh] space-y-6">
-      <div className="text-center text-xl font-bold text-white">
-        You have missing date values!
-      </div>
-      <div className="w-[80vw] max-w-md space-y-4">
+    <div className="flex flex-col justify-center items-center h-[80vh] text-gray-200">
+      <p className="text-lg text-gray-400 mt-4 px-8 text-center">
+        Your data may lack some dates, to procceed further just fill missing values.
+      </p>
+      <div className="w-full max-w-md mt-6">
         <button
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow"
+          className="w-full bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white text-lg py-3 px-6 rounded-lg shadow-lg font-semibold transition-all duration-200 transform hover:scale-105"
           onClick={() => {
             fillMissingDatesWithAverages();
           }}
         >
-          Fill missing values with Average
+          Fill Missing Values with Averages
         </button>
       </div>
     </div>

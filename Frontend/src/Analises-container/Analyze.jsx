@@ -20,7 +20,7 @@ function Analyze({ csvData, setCsvData, jsonData, setJsonData }) {
 
       {/* Logs section */}
       {!showDashboard &&
-        <div div className="mt-10 h-[35vh] w-[90vw] border bg-black mx-auto bg-opacity-50">
+        <div div className="mt-10 h-[35vh] w-[90vw] border bg-gray-800 mx-auto rounded-2xl">
           <BuildLogs csvData={csvData} setCsvData={setCsvData} jsonData={jsonData} setJsonData={setJsonData} setShowDashboard={setShowDashboard} />
         </div>
       }

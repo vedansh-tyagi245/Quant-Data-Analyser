@@ -33,26 +33,49 @@ function DemoTrading({ jsonData }) {
   };
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial' }}>
-      <h1 className='font-bold text-center m-10 text-3xl'>Demo Trading</h1>
-      <p className='font-mono text-center m-10 text-xl'>
-        Starting with an initial investment of <strong>${initialInvestment}</strong>,
-        reinvesting daily:
-      </p>
-      <div className="flex gap-5 md:flex-row flex-col text-lg text-center">
+    <div className="p-8 bg-gray-900 text-gray-300 flex flex-col items-center bg-opacity-25 h-[89vh]">
+      {/* Title */}
+      <h1 className="text-4xl font-bold text-center mb-10 text-white tracking-wide">
+        Demo Trading Simulator
+      </h1>
 
-        <h2 className=' bg-gray-600 mx-10 p-5 rounded-full bg-opacity-50'>
-          If you withdraw daily when the stock is highest then your
-          Total Money becomes: <span className="font-bold">${calculateTotalHigh()}</span></h2>
-        <h2 className=' bg-gray-600 mx-10 p-5 rounded-full bg-opacity-50'>
-          If you withdraw daily when the stock is lowest then your
-          Total Money becomes: <span className="font-bold">${calculateTotalLow()}</span> </h2>
+      {/* Subtitle */}
+      <p className="text-xl font-light text-center max-w-2xl mb-8 text-gray-400">
+        Starting with an initial investment of 
+        <span className="font-semibold text-gray-200"> ${initialInvestment}</span>, 
+        see how your money grows by reinvesting daily.
+      </p>
+
+      {/* Investment Summary */}
+      <div className="flex flex-col md:flex-row justify-center items-center gap-6 text-center w-full max-w-4xl">
+        {/* High Withdrawal */}
+        <div className="p-6 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-800 shadow-lg rounded-xl w-full md:w-1/2">
+          <h2 className="text-2xl font-semibold text-gray-100 mb-4">
+            Daily Withdrawal at High
+          </h2>
+          <p className="text-xl text-gray-300">
+            Total Money becomes: 
+            <span className="text-green-400 font-bold ml-2">${calculateTotalHigh()}</span>
+          </p>
+        </div>
+
+        {/* Low Withdrawal */}
+        <div className="p-6 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-800 shadow-lg rounded-xl w-full md:w-1/2">
+          <h2 className="text-2xl font-semibold text-gray-100 mb-4">
+            Daily Withdrawal at Low
+          </h2>
+          <p className="text-xl text-gray-300">
+            Total Money becomes: 
+            <span className="text-red-400 font-bold ml-2">${calculateTotalLow()}</span>
+          </p>
+        </div>
       </div>
-      <p className='text-sm text-center text-gray-500 mt-10'>
+
+      {/* Disclaimer */}
+      <p className="text-sm text-center text-gray-500 mt-10 max-w-3xl">
         <strong>Disclaimer:</strong> While the highest profit might seem exciting, keep in mind
-        that stock market trading involves risks, and focusing solely on the potential gains
-        may lead to underestimating potential losses. Always invest wisely and consider the
-        risks involved.
+        that stock market trading involves risks. Always invest wisely and consider potential
+        losses alongside gains.
       </p>
     </div>
   );

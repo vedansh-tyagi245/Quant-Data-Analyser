@@ -2,25 +2,25 @@ import React from 'react';
 
 function CSVTable({ csvData, setCsvData }) {
     return (
-        <div>
+        <div className=" rounded-xl shadow-lg">
             {/* Display CSV Data in Table */}
             {csvData && (
                 <div
-                    className="mt-1 overflow-y-auto overflow-x-auto max-w-[90vw] max-h-[40vh] p-0 border rounded-md text-center mx-auto"
-                    style={{ boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
+                    className="overflow-y-auto overflow-x-auto max-w-[90vw] max-h-[40vh] p-2 border border-gray-700 rounded-xl text-center mx-auto bg-gray-800"
+                    style={{ boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)' }}
                 >
-                    <table className="table-auto w-full">
+                    <table className="table-auto w-full text-gray-200">
                         <thead>
-                            <tr>
+                            <tr className="text-sm uppercase font-semibold border-b border-gray-700 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800">
                                 <th
-                                    className="border border-gray-500 p-2 bg-black bg-opacity-60 text-white sticky top-0 z-10 text-center"
+                                    className="border-r border-gray-600 py-3 px-4 text-center"
                                 >
                                     Line No.
                                 </th>
                                 {Object.keys(csvData[0]).map((header, index) => (
                                     <th
                                         key={index}
-                                        className="border border-gray-500 p-2 bg-black bg-opacity-60 text-white sticky top-0 z-10 text-center"
+                                        className="border-r border-gray-600 py-3 px-4 text-center"
                                     >
                                         {header}
                                     </th>
@@ -29,15 +29,18 @@ function CSVTable({ csvData, setCsvData }) {
                         </thead>
                         <tbody>
                             {csvData.map((row, index) => (
-                                <tr key={index} className="border-b">
+                                <tr
+                                    key={index}
+                                    className={`border-b border-gray-700 ${index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-700'} hover:bg-gray-600`}
+                                >
                                     {/* Display line number */}
-                                    <td className="border border-gray-500 p-2 text-white bg-black bg-opacity-50 text-center hover:bg-opacity-5">
+                                    <td className="py-3 px-4 text-center font-medium">
                                         {index + 1}
                                     </td>
-                                    {Object.values(row).map((value, index) => (
+                                    {Object.values(row).map((value, cellIndex) => (
                                         <td
-                                            key={index}
-                                            className="border border-gray-500 p-2 text-white bg-black bg-opacity-50 hover:bg-opacity-5"
+                                            key={cellIndex}
+                                            className="py-3 px-4 text-center text-sm font-light"
                                         >
                                             {value}
                                         </td>
