@@ -39,12 +39,12 @@ function StockPerformance({ jsonData, setJsonData }) {
         } else {
             setIsDataComplete(false);
         }
-    }, [jsonData]);
+    }, []);
 
     return (
         <div>
 
-            {isDataComplete == false && <div><Should_Complete_date jsonData={jsonData} setJsonData={setJsonData}/></div>}
+            {isDataComplete == false && <div><Should_Complete_date jsonData={jsonData} setJsonData={setJsonData} setIsDataComplete={setIsDataComplete}/></div>}
             {isDataComplete == true && <div><Stock_analyze jsonData={jsonData}/></div>}
         </div>
     )

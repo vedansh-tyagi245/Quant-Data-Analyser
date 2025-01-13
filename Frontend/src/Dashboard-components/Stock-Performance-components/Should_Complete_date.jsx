@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Modal from 'react-modal';
 
-function Should_Complete_date({ jsonData, setJsonData }) {
+// Set the app element for accessibility
+Modal.setAppElement('#root');
+
+function Should_Complete_date({ jsonData, setJsonData, setIsDataComplete }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
   // Helper function to parse DD/MM/YYYY into a Date object
   const parseDate = (dateStr) => {
     const [day, month, year] = dateStr.split('/').map(Number);
@@ -81,24 +88,42 @@ function Should_Complete_date({ jsonData, setJsonData }) {
     // Update the jsonData with the new filled data
     setJsonData(filledData);
     console.log('Filled Data:', filledData);
-    alert('Missing values have been filled with averages. View your dataset again to see updates');
+
+    // Set modal message and open modal
+    setModalMessage('Missing values have been filled with averages. View your dataset again to see updates.');
+    setIsModalOpen(true);
   };
 
   return (
     <div className="flex flex-col justify-center items-center h-[80vh] text-gray-200">
       <p className="text-lg text-gray-400 mt-4 px-8 text-center">
-        Your data may lack some dates, to procceed further just fill missing values.
+        Your data may lack some dates. To proceed further, fill missing values.
       </p>
       <div className="w-full max-w-md mt-6">
         <button
           className="w-full bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white text-lg py-3 px-6 rounded-lg shadow-lg font-semibold transition-all duration-200 transform hover:scale-105"
-          onClick={() => {
-            fillMissingDatesWithAverages();
-          }}
+          onClick={fillMissingDatesWithAverages}
         >
           Fill Missing Values with Averages
         </button>
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsDataComplete(true)}
+        contentLabel="Missing Values Filled"
+        className="bg-gray-800 text-white rounded-lg shadow-xl p-6 w-96 mx-auto mt-20"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+      >
+        <h2 className="text-2xl font-bold mb-4">Process Complete</h2>
+        <p className="text-lg mb-6">{modalMessage}</p>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg"
+          onClick={() => setIsDataComplete(true)}
+        >
+          Close
+        </button>
+      </Modal>
     </div>
   );
 }

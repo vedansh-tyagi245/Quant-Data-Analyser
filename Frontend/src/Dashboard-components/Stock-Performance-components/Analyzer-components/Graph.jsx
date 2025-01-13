@@ -105,7 +105,7 @@ function Graph({ jsonData }) {
     };
 
     return (
-        <div className="p-6 bg-gray-900 rounded-lg shadow-md">
+        <div className="p-6 bg-gray-900 rounded-lg shadow-md overflow-x-auto min-w-[1100px]">
             <h1 className="text-2xl font-bold mb-6 text-center text-gray-200">Stock Price Graph</h1>
             <div className="flex justify-between h-[58vh]">
                 <div className="flex-grow">
