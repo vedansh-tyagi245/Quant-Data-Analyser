@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UploadFile from '../File-Upload-components/UploadFile';
 import HomePage from './HomePage';
+import Tut_home_page from '../Tutorials-components/Tut_home_page';
 
 function Welcome() {
 
@@ -47,7 +48,7 @@ function Welcome() {
         <div>
             {link === '/' && <HomePage link={link} setLink={setLink} />}
 
-            {link === '/UploadFile' && <UploadFile link={link} setLink={setLink} />}
+            {link === '/Tutorials' && <Tut_home_page />}
         </div>
     );
 }
