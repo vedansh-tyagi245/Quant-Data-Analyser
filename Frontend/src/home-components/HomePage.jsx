@@ -13,7 +13,7 @@ function HomePage({ link, setLink }) {
         <div><div className='bg-grid-white h-[100vh]'>
 
             {/* Navbar Components */}
-            <Navbar />
+            <Navbar setLink={setLink}/>
 
             {/* Hero Section */}
             {!showAnalyze &&
